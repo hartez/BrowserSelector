@@ -81,16 +81,16 @@ namespace DanTup.BrowserSelector
                     }
                     else
 					{
-						ShowHelpInfo();
+						ShowHelpInfo(arg);
 						return;
 					}
 				}
 			}
 		}
 
-		static void ShowHelpInfo()
+		static void ShowHelpInfo(string arg = null)
 		{
-			MessageBox.Show(@"Usage:
+            var msg = @"Usage:
 
     BrowserSelector.exe --register
         Register as web browser
@@ -122,7 +122,14 @@ If you use the --wait flag with multiple urls/files each will open one after the
 
 To open multiple urls at the same time and wait for them, try the following:
 
-    BrowserSelector.exe ""url-or-file"" ""url-or-file"" --wait ""url-or-file""", "BrowserSelector", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    BrowserSelector.exe ""url-or-file"" ""url-or-file"" --wait ""url-or-file""";
+
+            if (!string.IsNullOrEmpty(arg))
+            {
+                msg = $"The URL attempted was {arg}\n\n" + msg;
+            }
+
+            MessageBox.Show(msg, "BrowserSelector", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		static void EnsureAdmin(string arg)
