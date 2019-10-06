@@ -75,7 +75,11 @@ namespace DanTup.BrowserSelector
 					{
 						LaunchWeblocFile(arg, waitForClose);
 					}
-					else
+                    else if (arg.StartsWith("file://", StringComparison.OrdinalIgnoreCase)) 
+                    {
+                        LaunchBrowser(arg, waitForClose);
+                    }
+                    else
 					{
 						ShowHelpInfo();
 						return;
